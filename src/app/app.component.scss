@@ -1,0 +1,17 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.logo {
+  a {
+    text-decoration: none;
+    color: rgba(black, .3);
+    margin-left: 4px;
+  }
+  small {
+    font-weight: normal;
+    color: rgba(black, .3);
+    font-size: 13px;
+    margin: 0 4px;
+  }
+}
