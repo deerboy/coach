@@ -66,8 +66,7 @@
 }
 
 .question {
-  font-size: 80px;
-  font-weight: bold;
+  font-size: 56px;
   text-align: center;
   justify-content: center;
   margin: 0 auto 80px;
@@ -82,16 +81,16 @@
 
 .answer {
   &__input {
-    font-size: 64px;
-    font-weight: bold;
+    font-size: 40px;
     outline: none;
     border: none;
     width: 100%;
     color: rgba(black, .6);
-    border-bottom: 4px solid black;
+    border: 2px solid black;
     box-sizing: border-box;
     -webkit-appearance: none;
-    border-radius: 0;
+    border-radius: 8px;
+    padding: 8px;
     @include sp {
       font-size: 16px;
       font-weight: normal;
