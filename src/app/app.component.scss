@@ -3,6 +3,11 @@
 }
 
 .logo {
+  cursor: pointer;
+  outline: none;
+}
+
+.brand {
   a {
     text-decoration: none;
     color: rgba(black, .3);
@@ -27,4 +32,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: auto;
+  height: 100%;
 }

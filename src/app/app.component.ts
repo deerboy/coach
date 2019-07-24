@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SessionService } from './services/session.service';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,14 @@ export class AppComponent {
   );
 
   constructor(
-    private sessionService: SessionService
-  ) {}
+    private sessionService: SessionService,
+    private hotkeysService: HotkeysService
+  ) {
+    this.hotkeysService.add(new Hotkey(['s', 'space'], (event: KeyboardEvent): boolean => {
+      this.toggleStatus();
+      return false;
+    }));
+  }
 
   start() {
     this.sessionService.start();

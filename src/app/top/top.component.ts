@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SessionService } from '../services/session.service';
-import { interval, Subscription } from 'rxjs';
+import { SessionService, DEFAULT_QUESTIONS } from '../services/session.service';
+import { interval, Subscription, Observable } from 'rxjs';
+import { Question } from '../interfaces/question';
+import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 @Component({
   selector: 'app-top',
@@ -12,33 +14,23 @@ export class TopComponent implements OnInit, OnDestroy {
   timer = 0;
   started: boolean;
   subscription: Subscription;
-  sessionTime = 18;
+  sessionTime = 1800;
   time: Date;
-  now = 0;
+  currentIndex = 0;
+  questionIndex$: Observable<number> = this.sessionService.question$;
+  sessionMin = this.sessionTime / 60;
+  now = {
+    min: 0,
+    sec: 0
+  };
 
-  questions = [
-    {
-      id: 'what',
-      text: '今一番の悩みは何ですか？'
-    },
-    {
-      id: 'goal',
-      text: '何をもって解決となりますか？'
-    },
-    {
-      id: 'how',
-      text: 'どうすれば解決しますか？'
-    },
-    {
-      id: 'when',
-      text: 'いつからはじめますか？'
-    }
-  ];
+  questions: Question[] = DEFAULT_QUESTIONS;
 
   qTime = this.sessionTime / this.questions.length;
 
   constructor(
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private hotkeysService: HotkeysService
   ) {
     this.sessionService.session$.subscribe(status => {
       this.started = status;
@@ -47,10 +39,25 @@ export class TopComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.hotkeysService.add(new Hotkey('right', (event: KeyboardEvent): boolean => {
+      const target = Math.min(this.currentIndex + 1, this.questions.length - 1);
+      this.sessionService.changeQuestion(target);
+      this.currentIndex = target;
+      return false;
+    }));
+
+    this.hotkeysService.add(new Hotkey('left', (event: KeyboardEvent): boolean => {
+      const target = Math.max(this.currentIndex - 1, 0);
+      this.sessionService.changeQuestion(target);
+      this.currentIndex = target;
+      return false;
+    }));
+
     this.subscription = interval(1000).subscribe(() => {
       if (this.started && this.timer < this.sessionTime) {
         this.timer++;
-        this.now = Math.floor((this.timer - 1) / this.qTime);
+        this.now = this.getMinSec(this.timer);
+        this.currentIndex = Math.floor((this.timer - 1) / this.qTime);
       } else {
         this.sessionService.stop();
       }
@@ -61,8 +68,12 @@ export class TopComponent implements OnInit, OnDestroy {
     return this.timer / this.sessionTime;
   }
 
-  get label(): number {
-    return Math.max(this.timer, 0);
+  private getMinSec(num: number) {
+    console.log(num);
+    return {
+      min: Math.floor(num / 60),
+      sec: num % 60,
+    };
   }
 
   ngOnInit() {

@@ -1,8 +1,8 @@
 <div class="wrap" (keydown.s)="toggleStatus()">
   <mat-toolbar class="header">
     <mat-toolbar-row>
-      <span class="logo"
-        >COACHING
+      <span class="brand"
+        ><span class="logo" routerLink="/">COACHING</span>
         <small
           >by<a href="https://twitter.com/d151005" target="_blank"
             >@d151005</a
@@ -17,13 +17,17 @@
         (click)="start()"
         matTooltip="ショートカット(s)"
       >
-        スタート
+      <mat-icon class="mat-18">play_arrow</mat-icon>
+        <span>スタート</span>
       </button>
       <ng-template #stopButton>
-        <button mat-button matTooltip="ショートカット(s)" (click)="stop()">一時中断</button>
+        <button mat-button matTooltip="ショートカット(s)" (click)="stop()">
+            <mat-icon class="mat-18">pause</mat-icon>
+            <span>一時中断</span>
+          </button>
       </ng-template>
-      <button mat-icon-button>
-        <mat-icon class="mat-18">settings</mat-icon>
+      <button mat-icon-button routerLink="edit">
+        <mat-icon class="mat-18">edit</mat-icon>
       </button>
     </mat-toolbar-row>
   </mat-toolbar>
