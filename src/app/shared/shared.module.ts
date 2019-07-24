@@ -11,7 +11,8 @@ import {
   MatTooltipModule,
   MatListModule,
   MatMenuModule,
-  MatBottomSheetModule
+  MatBottomSheetModule,
+  MatDialogModule
 } from '@angular/material';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -35,7 +36,8 @@ import { AutoFocusDirective } from '../directives/auto-focus.directive';
     MatBottomSheetModule,
     FormsModule,
     ReactiveFormsModule,
-    AutoFocusDirective
+    AutoFocusDirective,
+    MatDialogModule
   ]
 })
 export class SharedModule {}

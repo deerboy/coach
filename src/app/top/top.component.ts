@@ -5,6 +5,8 @@ import { tap } from 'rxjs/operators';
 import { Question } from '../interfaces/question';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { ReportComponent } from '../report/report.component';
 
 @Component({
   selector: 'app-top',
@@ -33,7 +35,8 @@ export class TopComponent implements OnInit, OnDestroy {
 
   constructor(
     private sessionService: SessionService,
-    private hotkeysService: HotkeysService
+    private hotkeysService: HotkeysService,
+    public dialog: MatDialog
   ) {
     this.sessionService.session$.subscribe(status => {
       this.started = status;
@@ -125,7 +128,13 @@ export class TopComponent implements OnInit, OnDestroy {
   }
 
   getReport() {
-
+    this.dialog.open(ReportComponent, {
+      width: '560px',
+      data: {
+        answers: this.answers,
+        questions: this.questions
+      }
+    });
   }
 
 }

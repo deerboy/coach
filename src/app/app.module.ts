@@ -10,6 +10,7 @@ import {HotkeyModule} from 'angular2-hotkeys';
 import { EditComponent } from './edit/edit.component';
 import { QuestionEditorComponent } from './question-editor/question-editor.component';
 import { AutoFocusDirective } from './directives/auto-focus.directive';
+import { ReportComponent } from './report/report.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { AutoFocusDirective } from './directives/auto-focus.directive';
     TopComponent,
     EditComponent,
     QuestionEditorComponent,
+    ReportComponent,
   ],
   imports: [
     SharedModule,
@@ -27,6 +29,7 @@ import { AutoFocusDirective } from './directives/auto-focus.directive';
     HotkeyModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ReportComponent]
 })
 export class AppModule { }

@@ -1,3 +1,10 @@
+@import "mixins";
+
+:host {
+  display: block;
+  width: 100%;
+}
+
 .bottom-bar {
   position: fixed;
   bottom: 0;
@@ -27,21 +34,33 @@
   &__label {
     position: absolute;
     bottom: 100%;
-    left: 8px;
+    left: 0;
     font-size: 40px;
     font-weight: bold;
     line-height: 1;
     margin: 0 0 8px;
+    @include sp {
+      font-size: 20px;
+    }
     small {
       font-weight: normal;
       font-size: 13px;
       color: rgba(black, .6);
+      @include sp {
+        font-size: 11px;
+      }
     }
   }
 }
 
 .main {
   padding-bottom: 56px;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 16px 56px;
+  @include sp {
+    margin-top: 40px;
+  }
 }
 
 .question {
@@ -50,6 +69,10 @@
   text-align: center;
   justify-content: center;
   margin: 0 auto 80px;
+  @include sp {
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
   &__message {
     margin: 0;
   }
@@ -64,11 +87,22 @@
     width: 100%;
     color: rgba(black, .6);
     border-bottom: 4px solid black;
+    @include sp {
+      font-size: 16px;
+      font-weight: normal;
+    }
   }
 }
 
 .report {
   position: fixed;
-  bottom: 24px;
+  top: 50%;
   right: 24px;
+  transform: translateY(-50%);
+  @include sp {
+    top: auto;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

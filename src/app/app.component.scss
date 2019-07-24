@@ -1,3 +1,5 @@
+@import "mixins";
+
 .spacer {
   flex: 1 1 auto;
 }
@@ -33,6 +35,9 @@
   height: 100%;
   display: flex;
   flex-flow: column;
+  @include sp {
+    display: block;
+  }
 }
 
 .content {
@@ -42,6 +47,11 @@
   justify-content: center;
   overflow: auto;
   height: 100%;
+  @include sp {
+    display: block;
+    overflow: visible;
+    height: auto;
+  }
 }
 
 .container {
