@@ -58,6 +58,8 @@
   max-width: 1024px;
   margin: 0 auto;
   padding: 0 16px 56px;
+  box-sizing: border-box;
+  width: 100%;
   @include sp {
     margin-top: 40px;
   }
