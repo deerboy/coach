@@ -1,4 +1,4 @@
-<div class="wrap" (keydown.s)="toggleStatus()">
+<div class="wrap">
   <mat-toolbar class="header">
     <mat-toolbar-row>
       <span class="brand"
@@ -10,24 +10,6 @@
         ></span
       >
       <span class="spacer"></span>
-      <button
-        mat-raised-button
-        *ngIf="!(started$ | async); else stopButton"
-        color="primary"
-        (click)="start()"
-        matTooltip="ショートカット(s)"
-      >
-      <mat-icon class="mat-18">play_arrow</mat-icon>
-        <span>スタート</span>
-      </button>
-      <button mat-button>コーチングガイド</button>
-      <button mat-button>トークキット</button>
-      <ng-template #stopButton>
-        <button mat-button matTooltip="ショートカット(s)" (click)="stop()">
-            <mat-icon class="mat-18">pause</mat-icon>
-            <span>一時中断</span>
-          </button>
-      </ng-template>
       <button mat-button routerLink="edit">
         カスタマイズ
       </button>

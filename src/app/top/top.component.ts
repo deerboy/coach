@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SessionService } from '../services/session.service';
 import { interval, Subscription, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Question } from '../interfaces/question';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
@@ -10,14 +11,17 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
   styleUrls: ['./top.component.scss']
 })
 export class TopComponent implements OnInit, OnDestroy {
-
+  status: boolean;
   timer = 0;
   started: boolean;
   subscription: Subscription;
   sessionTime = 1800;
   currentIndex = 0;
   questionIndex$: Observable<number> = this.sessionService.question$;
-  now = this.getMinSec(this.sessionTime);
+  now = this.getMinSec(0);
+  started$: Observable<boolean> = this.sessionService.session$.pipe(
+    tap(status => this.status = status)
+  );
 
   questions: Question[] = this.sessionService.questions;
 
@@ -31,6 +35,11 @@ export class TopComponent implements OnInit, OnDestroy {
         this.timer = 0;
       }
     });
+
+    this.hotkeysService.add(new Hotkey(['s', 'space'], (event: KeyboardEvent): boolean => {
+      this.toggleStatus();
+      return false;
+    }));
 
     this.hotkeysService.add(new Hotkey('right', (event: KeyboardEvent): boolean => {
       const target = Math.min(this.currentIndex + 1, this.questions.length - 1);
@@ -49,7 +58,7 @@ export class TopComponent implements OnInit, OnDestroy {
     this.subscription = interval(1000).subscribe(() => {
       if (this.started && this.timer < this.sessionTime) {
         this.timer++;
-        this.now = this.getMinSec(this.sessionTime - this.timer);
+        this.now = this.getMinSec(this.timer);
       } else {
         this.sessionService.stop();
       }
@@ -57,7 +66,7 @@ export class TopComponent implements OnInit, OnDestroy {
   }
 
   get per(): number {
-    return 1 - this.timer / this.sessionTime;
+    return this.timer / this.sessionTime;
   }
 
   private getMinSec(num: number) {
@@ -72,6 +81,22 @@ export class TopComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  start() {
+    this.sessionService.start();
+  }
+
+  stop() {
+    this.sessionService.stop();
+  }
+
+  toggleStatus() {
+    if (this.status) {
+      this.stop();
+    } else {
+      this.start();
+    }
   }
 
 }

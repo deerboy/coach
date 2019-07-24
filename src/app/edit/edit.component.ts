@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../services/session.service';
 import { Question } from '../interfaces/question';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatBottomSheet } from '@angular/material';
-import { QuestionEditorComponent } from '../question-editor/question-editor.component';
 
 @Component({
   selector: 'app-edit',
@@ -13,10 +12,10 @@ import { QuestionEditorComponent } from '../question-editor/question-editor.comp
 export class EditComponent implements OnInit {
 
   questions: Question[] = this.sessionService.questions;
+  editTarget: number;
 
   constructor(
     private sessionService: SessionService,
-    private bottomSheet: MatBottomSheet
   ) { }
 
   ngOnInit() {
@@ -37,13 +36,12 @@ export class EditComponent implements OnInit {
     this.sessionService.deleteQuestion(index);
   }
 
-  editQuestion(index: number, question: Question) {
-    this.bottomSheet.open(QuestionEditorComponent, {
-      data: {
-        index,
-        question
-      }
-    });
+  updateQuestion(index: number, text: string) {
+    this.sessionService.updateQuestion(
+      index,
+      text
+    );
+    this.editTarget = null;
   }
 
 }

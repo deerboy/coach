@@ -2,16 +2,25 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  MatToolbarModule, MatIconModule, MatCardModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatTooltipModule, MatListModule, MatMenuModule, MatBottomSheetModule
+  MatToolbarModule,
+  MatIconModule,
+  MatCardModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatButtonModule,
+  MatTooltipModule,
+  MatListModule,
+  MatMenuModule,
+  MatBottomSheetModule
 } from '@angular/material';
 
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AutoFocusDirective } from '../directives/auto-focus.directive';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-  ],
+  declarations: [AutoFocusDirective],
+  imports: [CommonModule],
   exports: [
     MatToolbarModule,
     MatIconModule,
@@ -23,7 +32,10 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatListModule,
     DragDropModule,
     MatMenuModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AutoFocusDirective
   ]
 })
-export class SharedModule { }
+export class SharedModule {}

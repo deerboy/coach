@@ -1,22 +1,85 @@
 <div class="container">
   <h1>カスタマイズ</h1>
+  <p class="info">情報はブラウザに保存されます。</p>
 
-  <mat-list cdkDropList (cdkDropListDropped)="drop($event)">
-    <mat-list-item *ngFor="let question of questions; let i = index;" cdkDrag>
-      <span matLine>{{ question.text }}</span>
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon mat-list-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu" (click)="editQuestion(i, question)">
-        <button mat-menu-item>
-          <mat-icon>edit</mat-icon>
-          <span>編集</span>
+  <form
+    class="form"
+    (ngSubmit)="addQuestion(question.value); question.value = ''"
+  >
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        #question
+        appAutoFocus
+        required
+        autocomplete="off"
+        placeholder="質問"
+      />
+    </mat-form-field>
+    <button
+      type="submit"
+      [disabled]="!question.value"
+      mat-raised-button
+      color="primary"
+    >
+      追加
+    </button>
+  </form>
+
+  <div class="list" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div class="box" *ngFor="let question of questions; let i = index" cdkDrag>
+      <div>
+        <span>{{ question.text }}</span>
+        <form
+        class="edit-form"
+        *ngIf="editTarget === i"
+        (ngSubmit)="updateQuestion(i, questionForm.value); questionForm.value = ''"
+      >
+        <mat-form-field>
+            <input
+              type="text"
+              matInput
+              #questionForm
+              appAutoFocus
+              required
+              autocomplete="off"
+              placeholder="質問"
+              [value]="question.text"
+            />
+          </mat-form-field>
+          <button
+            type="submit"
+            [disabled]="!questionForm.value"
+            mat-raised-button
+            color="primary"
+          >
+            編集
+          </button>
+          <button
+            type="button"
+            mat-button
+            (click)="editTarget = null"
+          >
+            キャンセル
+          </button>
+        </form>
+      </div>
+      <div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon mat-list-icon>more_vert</mat-icon>
         </button>
-        <button mat-menu-item (click)="deleteQuestion(i)">
-          <mat-icon>delete</mat-icon>
-          <span>削除</span>
-        </button>
-      </mat-menu>
-    </mat-list-item>
-  </mat-list>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editTarget = i">
+            <mat-icon>edit</mat-icon>
+            <span>編集</span>
+          </button>
+          <button mat-menu-item (click)="deleteQuestion(i)">
+            <mat-icon>delete</mat-icon>
+            <span>削除</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
 </div>

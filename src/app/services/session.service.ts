@@ -27,7 +27,7 @@ const DEFAULT_QUESTIONS: Question[] = [
 })
 export class SessionService {
 
-  questions = DEFAULT_QUESTIONS;
+  questions: Question[] = this.load() || DEFAULT_QUESTIONS;
   questionIndex: number;
   sessionSource = new Subject<boolean>();
   session$ = this.sessionSource.asObservable();
@@ -51,6 +51,12 @@ export class SessionService {
 
   deleteQuestion(index: number) {
     this.questions.splice(index, 1);
+    this.save();
+  }
+
+  updateQuestion(i: number, text: string) {
+    this.questions[i].text = text;
+    this.save();
   }
 
   addQuestion(text: string) {
@@ -58,9 +64,24 @@ export class SessionService {
       id: Date.now().toString(),
       text
     });
+    this.save();
   }
 
   changeQuestionOrder(before: number, after: number) {
     moveItemInArray(this.questions, before, after);
+    this.save();
+  }
+
+  save() {
+    localStorage.setItem('questions', JSON.stringify(this.questions));
+  }
+
+  load() {
+    const item = localStorage.getItem('questions');
+    if (item) {
+      return JSON.parse(item);
+    } else {
+      return null;
+    }
   }
 }

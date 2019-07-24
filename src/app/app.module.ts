@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import {HotkeyModule} from 'angular2-hotkeys';
 import { EditComponent } from './edit/edit.component';
 import { QuestionEditorComponent } from './question-editor/question-editor.component';
+import { AutoFocusDirective } from './directives/auto-focus.directive';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { QuestionEditorComponent } from './question-editor/question-editor.compo
     AppComponent,
     TopComponent,
     EditComponent,
-    QuestionEditorComponent
+    QuestionEditorComponent,
   ],
   imports: [
     SharedModule,
