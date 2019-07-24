@@ -1,9 +1,34 @@
-<mat-toolbar>
-  <mat-toolbar-row>
-    <span class="logo">COACHING <small>by<a href="https://twitter.com/d151005" target="_blank">@d151005</a></small></span>
-    <span class="spacer"></span>
-    <button mat-raised-button color="primary" (click)="start()">スタート</button>
-  </mat-toolbar-row>
-</mat-toolbar>
+<div class="wrap" (keydown.s)="toggleStatus()">
+  <mat-toolbar class="header">
+    <mat-toolbar-row>
+      <span class="logo"
+        >COACHING
+        <small
+          >by<a href="https://twitter.com/d151005" target="_blank"
+            >@d151005</a
+          ></small
+        ></span
+      >
+      <span class="spacer"></span>
+      <button
+        mat-raised-button
+        *ngIf="!(started$ | async); else stopButton"
+        color="primary"
+        (click)="start()"
+        matTooltip="ショートカット(s)"
+      >
+        スタート
+      </button>
+      <ng-template #stopButton>
+        <button mat-button matTooltip="ショートカット(s)" (click)="stop()">一時中断</button>
+      </ng-template>
+      <button mat-icon-button>
+        <mat-icon class="mat-18">settings</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
-<router-outlet></router-outlet>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

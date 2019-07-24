@@ -15,7 +15,7 @@ export class SessionService {
     this.sessionSource.next(true);
   }
 
-  end() {
+  stop() {
     this.sessionSource.next(false);
   }
 }

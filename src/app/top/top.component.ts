@@ -42,12 +42,17 @@ export class TopComponent implements OnInit, OnDestroy {
   ) {
     this.sessionService.session$.subscribe(status => {
       this.started = status;
+      if (status && this.timer === this.sessionTime) {
+        this.timer = 0;
+      }
     });
 
     this.subscription = interval(1000).subscribe(() => {
       if (this.started && this.timer < this.sessionTime) {
         this.timer++;
         this.now = Math.floor((this.timer - 1) / this.qTime);
+      } else {
+        this.sessionService.stop();
       }
     });
   }
@@ -57,7 +62,7 @@ export class TopComponent implements OnInit, OnDestroy {
   }
 
   get label(): number {
-    return Math.max(this.timer - 1, 0);
+    return Math.max(this.timer, 0);
   }
 
   ngOnInit() {

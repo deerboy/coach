@@ -15,3 +15,16 @@
     margin: 0 4px;
   }
 }
+
+.wrap {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
