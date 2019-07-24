@@ -61,7 +61,7 @@
   box-sizing: border-box;
   width: 100%;
   @include sp {
-    margin-top: 40px;
+    padding-top: 40px;
   }
 }
 
@@ -108,5 +108,20 @@
     bottom: 120px;
     left: 50%;
     transform: translateX(-50%);
+  }
+}
+
+.index {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  margin: 0;
+  color: rgba(black, .6);
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  @include sp {
+    font-size: 13px;
+    font-weight: normal;
   }
 }

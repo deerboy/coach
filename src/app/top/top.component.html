@@ -4,6 +4,8 @@
   <p class="question__message">{{ questions[questionIndex$ | async].text }}</p>
 </div>
 
+<p class="index">{{currentIndex + 1}}/{{questions.length}}</p>
+
 <div class="answer">
   <input type="text" #answerInput [formControl]="answer" class="answer__input">
 </div>
