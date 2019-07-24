@@ -72,12 +72,10 @@ export class TopComponent implements OnInit, OnDestroy {
 
   toNext() {
     this.changeQuestion(Math.min(this.currentIndex + 1, this.questions.length - 1));
-    this.answerInput.nativeElement.focus();
   }
 
   toPrev() {
     this.changeQuestion(Math.max(this.currentIndex - 1, 0));
-    this.answerInput.nativeElement.focus();
   }
 
   get per(): number {
