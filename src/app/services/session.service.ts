@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { Question } from '../interfaces/question';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 const DEFAULT_QUESTIONS: Question[] = [
   {
@@ -46,5 +47,20 @@ export class SessionService {
 
   changeQuestion(index: number)   {
     this.questionSource.next(index);
+  }
+
+  deleteQuestion(index: number) {
+    this.questions.splice(index, 1);
+  }
+
+  addQuestion(text: string) {
+    this.questions.push({
+      id: Date.now().toString(),
+      text
+    });
+  }
+
+  changeQuestionOrder(before: number, after: number) {
+    moveItemInArray(this.questions, before, after);
   }
 }

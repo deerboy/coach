@@ -1,9 +1,22 @@
 <div class="container">
   <h1>カスタマイズ</h1>
 
-  <mat-list>
-    <mat-list-item *ngFor="let question of questions">
-      {{ question.text }}
+  <mat-list cdkDropList (cdkDropListDropped)="drop($event)">
+    <mat-list-item *ngFor="let question of questions; let i = index;" cdkDrag>
+      <span matLine>{{ question.text }}</span>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon mat-list-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" (click)="editQuestion(i, question)">
+        <button mat-menu-item>
+          <mat-icon>edit</mat-icon>
+          <span>編集</span>
+        </button>
+        <button mat-menu-item (click)="deleteQuestion(i)">
+          <mat-icon>delete</mat-icon>
+          <span>削除</span>
+        </button>
+      </mat-menu>
     </mat-list-item>
   </mat-list>
 </div>

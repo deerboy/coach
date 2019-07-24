@@ -8,13 +8,15 @@ import { TopComponent } from './top/top.component';
 import { SharedModule } from './shared/shared.module';
 import {HotkeyModule} from 'angular2-hotkeys';
 import { EditComponent } from './edit/edit.component';
+import { QuestionEditorComponent } from './question-editor/question-editor.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TopComponent,
-    EditComponent
+    EditComponent,
+    QuestionEditorComponent
   ],
   imports: [
     SharedModule,

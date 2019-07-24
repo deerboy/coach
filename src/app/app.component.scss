@@ -2,9 +2,16 @@
   flex: 1 1 auto;
 }
 
+.header {
+  background: none;
+}
+
 .logo {
   cursor: pointer;
   outline: none;
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 27px;
+  color: #4E4041;
 }
 
 .brand {
