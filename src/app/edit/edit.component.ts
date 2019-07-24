@@ -3,6 +3,7 @@ import { SessionService } from '../services/session.service';
 import { Question } from '../interfaces/question';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatBottomSheet } from '@angular/material';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit',
@@ -13,12 +14,18 @@ export class EditComponent implements OnInit {
 
   questions: Question[] = this.sessionService.questions;
   editTarget: number;
+  sessionTime = this.sessionService.sessionTime;
+  sessionTimeForm = new FormControl(this.sessionTime, Validators.required);
 
   constructor(
     private sessionService: SessionService,
   ) { }
 
   ngOnInit() {
+    this.sessionTimeForm.valueChanges.subscribe(time => {
+      this.sessionService.sessionTime = time;
+      this.sessionService.save();
+    });
   }
 
   drop(event: CdkDragDrop<string[]>) {

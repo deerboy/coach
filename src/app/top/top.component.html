@@ -1,10 +1,22 @@
+<div class="main">
+
 <div class="question">
   <p class="question__message">{{ questions[questionIndex$ | async].text }}</p>
 </div>
 
+<div class="answer">
+  <input type="text" #answerInput [formControl]="answer" class="answer__input" appAutoFocus>
+</div>
+
+</div>
+
+<button (click)="getReport()" mat-fab color="primary" class="report" *ngIf="isComplete">
+  <mat-icon class="mat-18">assignment</mat-icon>
+</button>
+
 <div class="bottom-bar">
   <div class="controls">
-    <button mat-icon-button>
+    <button mat-icon-button (click)="toPrev()">
       <mat-icon class="mat-18" matTooltip="次の質問(←)">chevron_left</mat-icon>
     </button>
     <button
@@ -20,7 +32,7 @@
         <mat-icon class="mat-18">pause</mat-icon>
       </button>
     </ng-template>
-    <button mat-icon-button matTooltip="次の質問(→)">
+    <button mat-icon-button matTooltip="次の質問(→)" (click)="toNext()">
       <mat-icon class="mat-18">chevron_right</mat-icon>
     </button>
   </div>

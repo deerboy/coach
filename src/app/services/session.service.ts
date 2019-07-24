@@ -27,10 +27,12 @@ const DEFAULT_QUESTIONS: Question[] = [
 })
 export class SessionService {
 
-  questions: Question[] = this.load() || DEFAULT_QUESTIONS;
+  sessionTime = this.load('sessionTime') || 1800;
+  questions: Question[] = this.load('questions') || DEFAULT_QUESTIONS;
   questionIndex: number;
   sessionSource = new Subject<boolean>();
   session$ = this.sessionSource.asObservable();
+
 
   questionSource = new BehaviorSubject<number>(0);
   question$ = this.questionSource.asObservable();
@@ -73,13 +75,16 @@ export class SessionService {
   }
 
   save() {
-    localStorage.setItem('questions', JSON.stringify(this.questions));
+    localStorage.setItem('data', JSON.stringify({
+      sessionTime: this.sessionTime,
+      questions: this.questions
+    }));
   }
 
-  load() {
-    const item = localStorage.getItem('questions');
+  private load(key: string) {
+    const item = localStorage.getItem('data');
     if (item) {
-      return JSON.parse(item);
+      return JSON.parse(item)[key];
     } else {
       return null;
     }

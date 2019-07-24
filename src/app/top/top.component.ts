@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { SessionService } from '../services/session.service';
 import { interval, Subscription, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Question } from '../interfaces/question';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-top',
@@ -15,15 +16,20 @@ export class TopComponent implements OnInit, OnDestroy {
   timer = 0;
   started: boolean;
   subscription: Subscription;
-  sessionTime = 1800;
+  sessionTime = this.sessionService.sessionTime;
   currentIndex = 0;
   questionIndex$: Observable<number> = this.sessionService.question$;
   now = this.getMinSec(0);
   started$: Observable<boolean> = this.sessionService.session$.pipe(
     tap(status => this.status = status)
   );
-
+  answer = new FormControl();
   questions: Question[] = this.sessionService.questions;
+  answers: string[] = [];
+
+  @ViewChild('answerInput', {
+    static: true
+  }) answerInput: ElementRef;
 
   constructor(
     private sessionService: SessionService,
@@ -42,16 +48,12 @@ export class TopComponent implements OnInit, OnDestroy {
     }));
 
     this.hotkeysService.add(new Hotkey('right', (event: KeyboardEvent): boolean => {
-      const target = Math.min(this.currentIndex + 1, this.questions.length - 1);
-      this.sessionService.changeQuestion(target);
-      this.currentIndex = target;
+      this.toNext();
       return false;
     }));
 
     this.hotkeysService.add(new Hotkey('left', (event: KeyboardEvent): boolean => {
-      const target = Math.max(this.currentIndex - 1, 0);
-      this.sessionService.changeQuestion(target);
-      this.currentIndex = target;
+      this.toPrev();
       return false;
     }));
 
@@ -65,8 +67,24 @@ export class TopComponent implements OnInit, OnDestroy {
     });
   }
 
+  toNext() {
+    this.changeQuestion(Math.min(this.currentIndex + 1, this.questions.length - 1));
+    this.answerInput.nativeElement.focus();
+  }
+
+  toPrev() {
+    this.changeQuestion(Math.max(this.currentIndex - 1, 0));
+    this.answerInput.nativeElement.focus();
+  }
+
   get per(): number {
     return this.timer / this.sessionTime;
+  }
+
+  private changeQuestion(target: number) {
+    this.sessionService.changeQuestion(target);
+    this.currentIndex = target;
+    this.answer.patchValue(this.answers[this.currentIndex]);
   }
 
   private getMinSec(num: number) {
@@ -77,6 +95,9 @@ export class TopComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.answer.valueChanges.subscribe(value => {
+      this.answers[this.currentIndex] = value;
+    });
   }
 
   ngOnDestroy() {
@@ -97,6 +118,14 @@ export class TopComponent implements OnInit, OnDestroy {
     } else {
       this.start();
     }
+  }
+
+  get isComplete() {
+    return this.questions.length === this.answers.filter(v => v).length;
+  }
+
+  getReport() {
+
   }
 
 }
