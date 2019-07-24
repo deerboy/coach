@@ -4,8 +4,6 @@
 
 <div class="timer">
   <p class="timer__label">
-    <ng-container *ngIf="now.min">
-      {{now.min}}:
-    </ng-container>{{now.sec}}/{{sessionMin}}min</p>
+    <ng-container *ngIf="now.min">{{now.min}}:</ng-container>{{now.sec | number:'2.0'}}</p>
   <div class="timer__value" [style.transform]="'scaleX(' + per + ')'"></div>
 </div>

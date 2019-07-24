@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionService } from '../services/session.service';
+import { Question } from '../interfaces/question';
 
 @Component({
   selector: 'app-edit',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditComponent implements OnInit {
 
-  constructor() { }
+  questions: Question[] = this.sessionService.questions;
+
+  constructor(
+    private sessionService: SessionService
+  ) { }
 
   ngOnInit() {
   }

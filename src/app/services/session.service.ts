@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { Question } from '../interfaces/question';
 
-export const DEFAULT_QUESTIONS: Question[] = [
+const DEFAULT_QUESTIONS: Question[] = [
   {
     id: 'what',
     text: '今一番の悩みは何ですか？'
@@ -26,6 +26,7 @@ export const DEFAULT_QUESTIONS: Question[] = [
 })
 export class SessionService {
 
+  questions = DEFAULT_QUESTIONS;
   questionIndex: number;
   sessionSource = new Subject<boolean>();
   session$ = this.sessionSource.asObservable();

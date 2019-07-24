@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SessionService, DEFAULT_QUESTIONS } from '../services/session.service';
+import { SessionService } from '../services/session.service';
 import { interval, Subscription, Observable } from 'rxjs';
 import { Question } from '../interfaces/question';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
@@ -15,18 +15,11 @@ export class TopComponent implements OnInit, OnDestroy {
   started: boolean;
   subscription: Subscription;
   sessionTime = 1800;
-  time: Date;
   currentIndex = 0;
   questionIndex$: Observable<number> = this.sessionService.question$;
-  sessionMin = this.sessionTime / 60;
-  now = {
-    min: 0,
-    sec: 0
-  };
+  now = this.getMinSec(this.sessionTime);
 
-  questions: Question[] = DEFAULT_QUESTIONS;
-
-  qTime = this.sessionTime / this.questions.length;
+  questions: Question[] = this.sessionService.questions;
 
   constructor(
     private sessionService: SessionService,
@@ -56,8 +49,7 @@ export class TopComponent implements OnInit, OnDestroy {
     this.subscription = interval(1000).subscribe(() => {
       if (this.started && this.timer < this.sessionTime) {
         this.timer++;
-        this.now = this.getMinSec(this.timer);
-        this.currentIndex = Math.floor((this.timer - 1) / this.qTime);
+        this.now = this.getMinSec(this.sessionTime - this.timer);
       } else {
         this.sessionService.stop();
       }
@@ -65,11 +57,10 @@ export class TopComponent implements OnInit, OnDestroy {
   }
 
   get per(): number {
-    return this.timer / this.sessionTime;
+    return 1 - this.timer / this.sessionTime;
   }
 
   private getMinSec(num: number) {
-    console.log(num);
     return {
       min: Math.floor(num / 60),
       sec: num % 60,
