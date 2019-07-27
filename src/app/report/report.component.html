@@ -1,3 +1,4 @@
+<div id="result" class="wrap">
 <figure
   class="cover"
   style="background-image: url(./assets/images/result.png)"
@@ -15,11 +16,14 @@
     </ng-container>
   </dl>
 
-  <button mat-raised-button color="primary">
-    <span>PDFダウンロード</span>
-    <mat-icon class="mat-18">picture_as_pdf</mat-icon>
-  </button>
-  <button mat-button (click)="copy()">
-    <span>テキストをコピー</span>
-  </button>
+  <ng-container *ngIf="image">
+    <a [href]="image" download="コーチング結果-{{date | date:'yyyy年MM月dd日'}}" mat-raised-button color="primary" [disabled]="!image">
+      <span>PDFダウンロード</span>
+      <mat-icon class="mat-18">picture_as_pdf</mat-icon>
+    </a>
+    <button mat-button (click)="copy()">
+      <span>テキストをコピー</span>
+    </button>
+  </ng-container>
+</div>
 </div>

@@ -42,7 +42,6 @@ export class SessionService {
   sessionSource = new Subject<boolean>();
   session$ = this.sessionSource.asObservable();
 
-
   questionSource = new BehaviorSubject<number>(0);
   question$ = this.questionSource.asObservable();
 
