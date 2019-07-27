@@ -17,13 +17,8 @@
   </dl>
 
   <ng-container *ngIf="image">
-    <a class="btn" [href]="image" download="コーチング結果-{{date | date:'yyyy年MM月dd日'}}" mat-raised-button color="primary" [disabled]="!image">
-      <span>PDFダウンロード</span>
-      <mat-icon class="mat-18">picture_as_pdf</mat-icon>
-    </a>
-    <button mat-button (click)="copy()">
-      <span>テキストをコピー</span>
-    </button>
+    <a class="btn" [href]="image" download="コーチング結果-{{date | date:'yyyy年MM月dd日'}}" mat-raised-button color="primary" [disabled]="!image">イメージ取得</a>
+    <button mat-button (click)="copy()">テキストをコピー</button>
   </ng-container>
 </div>
 </div>

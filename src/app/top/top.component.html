@@ -44,7 +44,7 @@
   ></mat-progress-bar>
   <div class="bottom-bar__body">
     <div class="controls">
-      <button mat-icon-button (click)="toPrev()">
+      <button mat-icon-button (click)="toPrev()" [disabled]="currentIndex === 0">
         <mat-icon class="mat-18" matTooltip="次の質問(←)"
           >chevron_left</mat-icon
         >
@@ -62,7 +62,7 @@
           <mat-icon class="mat-18">pause</mat-icon>
         </button>
       </ng-template>
-      <button mat-icon-button matTooltip="次の質問(→)" (click)="toNext()">
+      <button mat-icon-button matTooltip="次の質問(→)" (click)="toNext()" [disabled]="currentIndex === questions.length - 1">
         <mat-icon class="mat-18">chevron_right</mat-icon>
       </button>
     </div>

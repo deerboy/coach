@@ -6,28 +6,23 @@ import { moveItemInArray } from '@angular/cdk/drag-drop';
 const DEFAULT_QUESTIONS: Question[] = [
   {
     id: 'what',
-    title: '今感じてる課題は？',
-    description: '質問を繰り返して課題の解像度をあげてください。'
-  },
-  {
-    id: 'goal',
-    title: '何をもって解決となりますか？',
-    description: '質問を繰り返して具体的な達成条件を導き出してください。'
+    title: '最終的な目標は？',
+    description: '質問を繰り返して目標の解像度をあげてください。'
   },
   {
     id: 'how',
-    title: 'どうすれば解決しますか？',
-    description: '質問を繰り返して具体的なアクションを導き出してください。'
+    title: 'なにからはじめますか？',
+    description: '具体的なアクションをヒアリングしてください。'
   },
   {
     id: 'when',
     title: 'いつからはじめますか？',
-    description: '質問を繰り返して明確な開始時期を定義してください。'
+    description: '明確な開始日を定義してください。'
   },
   {
     id: 'check',
-    title: 'どのように進捗が把握できますか？',
-    description: '目標達成までの間、進捗を把握するための報告手段を提案してもらいましょう。'
+    title: '進捗を知る方法は？',
+    description: '共有手段を具体的に提案してもらいましょう。'
   },
 ];
 
