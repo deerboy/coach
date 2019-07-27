@@ -127,7 +127,7 @@ export class TopComponent implements OnInit, OnDestroy {
 
   getReport() {
     this.dialog.open(ReportComponent, {
-      width: '560px',
+      width: '960px',
       data: {
         answers: this.answers,
         questions: this.questions

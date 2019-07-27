@@ -1,24 +1,29 @@
-@import 'mixins';
-
 :host {
-  display: block;
+  display: flex;
   position: relative;
+  margin: -24px;
 }
+
+.body {
+  flex: 1;
+  padding: 40px;
+}
+
 
 .cover {
-  background: center/90% no-repeat;
-  height: 230px;
+  background: center/70% #f1e4e7 no-repeat;
+  width: 50%;
   margin: 0;
-  @include sp {
-    height: 120px;
-  }
 }
+
+@import 'mixins';
 
 h1 {
   font-size: 24px;
-  margin: 0 0 24px;
+  margin: 0 0 8px;
+  line-height: 1;
   @include sp {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
   }
 }
 
@@ -47,11 +52,11 @@ h1 {
 
 .by {
   position: absolute;
-  top: -8px;
-  right: 0;
-  font-size: 14px;
+  top: 16px;
+  left: 16px;
+  font-size: 24px;
   font-family: 'Berkshire Swash', cursive;
-  color: rgba(black, 0.38);
+  color: rgba(white, 0.87);
   margin: 0;
   @include sp {
     font-size: 14px;
@@ -60,4 +65,17 @@ h1 {
 
 mat-icon {
   margin-left: 8px;
+}
+
+.date {
+  color: rgba(black, .38);
+  font-size: 13px;
+  margin-bottom: 24px;
+  @include sp {
+    margin-bottom: 16px;
+  }
+}
+
+button {
+  margin-right: 16px;
 }

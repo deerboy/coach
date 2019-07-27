@@ -8,6 +8,7 @@ import { TopComponent } from './top/top.component';
 import { SharedModule } from './shared/shared.module';
 import {HotkeyModule} from 'angular2-hotkeys';
 import { EditComponent } from './edit/edit.component';
+import { ClipboardModule } from 'ngx-clipboard';
 import { ReportComponent } from './report/report.component';
 
 
@@ -23,7 +24,8 @@ import { ReportComponent } from './report/report.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HotkeyModule.forRoot()
+    HotkeyModule.forRoot(),
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent],
