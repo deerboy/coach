@@ -5,6 +5,7 @@ import { formatDate } from '@angular/common';
 import { Question } from '../interfaces/question';
 import html2canvas from 'html2canvas';
 
+
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
