@@ -8,8 +8,6 @@ import { TopComponent } from './top/top.component';
 import { SharedModule } from './shared/shared.module';
 import {HotkeyModule} from 'angular2-hotkeys';
 import { EditComponent } from './edit/edit.component';
-import { QuestionEditorComponent } from './question-editor/question-editor.component';
-import { AutoFocusDirective } from './directives/auto-focus.directive';
 import { ReportComponent } from './report/report.component';
 
 
@@ -18,7 +16,6 @@ import { ReportComponent } from './report/report.component';
     AppComponent,
     TopComponent,
     EditComponent,
-    QuestionEditorComponent,
     ReportComponent,
   ],
   imports: [

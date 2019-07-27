@@ -35,18 +35,24 @@ export class EditComponent implements OnInit {
     );
   }
 
-  addQuestion(text: string) {
-    this.sessionService.addQuestion(text);
+  addQuestion(body: {
+    title: string;
+    description: string;
+  }) {
+    this.sessionService.addQuestion(body);
   }
 
   deleteQuestion(index: number) {
     this.sessionService.deleteQuestion(index);
   }
 
-  updateQuestion(index: number, text: string) {
+  updateQuestion(index: number, body: {
+    title: string;
+    description: string;
+  }) {
     this.sessionService.updateQuestion(
       index,
-      text
+      body
     );
     this.editTarget = null;
   }

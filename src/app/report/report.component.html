@@ -1,12 +1,19 @@
 <figure class="cover" style="background-image: url(./assets/images/result.png)"></figure>
-
-<h1>Report</h1>
-
 <p class="by">CoachKit</p>
+
+<h1>コーチング結果</h1>
 
 <dl class="result">
   <ng-container *ngFor="let question of data.questions; let i = index;">
-    <dt class="result__q">{{question.text}}</dt>
+    <dt class="result__q">{{question.title}}</dt>
     <dd class="result__a">{{data.answers[i]}}</dd>
   </ng-container>
 </dl>
+
+<button mat-raised-button color="primary">
+  <span>PDFダウンロード</span>
+  <mat-icon class="mat-18">picture_as_pdf</mat-icon>
+</button>
+<button mat-button>
+  <span>テキストをコピー</span>
+</button>

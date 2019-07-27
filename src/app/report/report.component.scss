@@ -3,7 +3,6 @@
 :host {
   display: block;
   position: relative;
-  text-align: center;
 }
 
 .cover {
@@ -16,6 +15,7 @@
 }
 
 h1 {
+  font-size: 24px;
   margin: 0 0 24px;
   @include sp {
     margin-bottom: 16px;
@@ -25,7 +25,7 @@ h1 {
 .result {
   letter-spacing: 1px;
   &__q {
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 8px;
     @include sp {
       font-size: 16px;
@@ -49,11 +49,15 @@ h1 {
   position: absolute;
   top: -8px;
   right: 0;
-  font-size: 24px;
+  font-size: 14px;
   font-family: 'Berkshire Swash', cursive;
   color: rgba(black, 0.38);
   margin: 0;
   @include sp {
     font-size: 14px;
   }
+}
+
+mat-icon {
+  margin-left: 8px;
 }

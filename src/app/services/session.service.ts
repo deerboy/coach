@@ -6,20 +6,29 @@ import { moveItemInArray } from '@angular/cdk/drag-drop';
 const DEFAULT_QUESTIONS: Question[] = [
   {
     id: 'what',
-    text: '今一番の悩みは何ですか？'
+    title: '今感じてる課題は？',
+    description: '質問を繰り返して課題の解像度をあげてください。'
   },
   {
     id: 'goal',
-    text: '何をもって解決となりますか？'
+    title: '何をもって解決となりますか？',
+    description: '質問を繰り返して具体的な達成条件を導き出してください。'
   },
   {
     id: 'how',
-    text: 'どうすれば解決しますか？'
+    title: 'どうすれば解決しますか？',
+    description: '質問を繰り返して具体的なアクションを導き出してください。'
   },
   {
     id: 'when',
-    text: 'いつからはじめますか？'
-  }
+    title: 'いつからはじめますか？',
+    description: '質問を繰り返して明確な開始時期を定義してください。'
+  },
+  {
+    id: 'check',
+    title: 'どのように進捗が把握できますか？',
+    description: '目標達成までの間、進捗を把握するための報告手段を提案してもらいましょう。'
+  },
 ];
 
 @Injectable({
@@ -56,15 +65,22 @@ export class SessionService {
     this.save();
   }
 
-  updateQuestion(i: number, text: string) {
-    this.questions[i].text = text;
+  updateQuestion(i: number, body: {
+    title: string;
+    description: string;
+  }) {
+    this.questions[i].title = body.title;
+    this.questions[i].description = body.description;
     this.save();
   }
 
-  addQuestion(text: string) {
+  addQuestion(body: {
+    title: string;
+    description: string;
+  }) {
     this.questions.push({
       id: Date.now().toString(),
-      text
+      ...body
     });
     this.save();
   }

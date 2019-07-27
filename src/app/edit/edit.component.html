@@ -36,7 +36,7 @@
   <div class="list" cdkDropList (cdkDropListDropped)="drop($event)">
     <div class="box" *ngFor="let question of questions; let i = index" cdkDrag>
       <div>
-        <span>{{ question.text }}</span>
+        <span>{{ question.title }}</span>
         <form
         class="edit-form"
         *ngIf="editTarget === i"
@@ -51,7 +51,7 @@
               required
               autocomplete="off"
               placeholder="質問"
-              [value]="question.text"
+              [value]="question.title"
             />
           </mat-form-field>
           <button

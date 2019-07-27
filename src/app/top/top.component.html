@@ -1,48 +1,76 @@
+<figure class="clip"></figure>
+
 <div class="main">
+  <p class="index">{{ currentIndex + 1 }} of {{ questions.length }}</p>
+  <div class="question">
+    <p class="question__message">
+      {{ questions[questionIndex$ | async].title }}
+    </p>
+    <p class="question__description">
+      {{ questions[questionIndex$ | async].description }}
+    </p>
+  </div>
 
-<div class="question">
-  <p class="question__message">{{ questions[questionIndex$ | async].text }}</p>
-</div>
+  <div class="answer">
+    <mat-form-field class="answer__input" appearance="outline">
+      <mat-label>ノート</mat-label>
+      <textarea
+        matInput
+        placeholder="回答をメモしてください"
+        type="text"
+        #answerInput
+        [formControl]="answer"
+      ></textarea>
+    </mat-form-field>
+  </div>
 
-<p class="index">{{currentIndex + 1}}/{{questions.length}}</p>
-
-<div class="answer">
-  <input type="text" #answerInput [formControl]="answer" class="answer__input">
-</div>
-
-</div>
-
-<button (click)="getReport()" mat-fab color="primary" class="report" *ngIf="isComplete">
-  <mat-icon class="mat-18">assignment</mat-icon>
-</button>
-
-<div class="bottom-bar">
-  <div class="controls">
-    <button mat-icon-button (click)="toPrev()">
-      <mat-icon class="mat-18" matTooltip="次の質問(←)">chevron_left</mat-icon>
-    </button>
+  <div class="report">
     <button
-      mat-icon-button
-      matTooltip="カウントダウン(s)"
-      (click)="start()"
-      *ngIf="!(started$ | async); else stopButton"
+      (click)="getReport()"
+      mat-raised-button
+      color="primary"
+      [disabled]="!isComplete"
     >
-      <mat-icon class="mat-18">play_arrow</mat-icon>
-    </button>
-    <ng-template #stopButton>
-      <button mat-icon-button matTooltip="一時停止(s)" (click)="stop()">
-        <mat-icon class="mat-18">pause</mat-icon>
-      </button>
-    </ng-template>
-    <button mat-icon-button matTooltip="次の質問(→)" (click)="toNext()">
-      <mat-icon class="mat-18">chevron_right</mat-icon>
+      レポートを表示
     </button>
   </div>
-  <div class="timer">
-    <p class="timer__label">
-      <ng-container>{{ now.min | number: '2.0' }}:</ng-container
-      >{{ now.sec | number: '2.0' }} <small>セッション: {{sessionTime / 60}}分</small>
+</div>
+
+<div class="bottom-bar">
+  <mat-progress-bar
+    mode="determinate"
+    color="accent"
+    [value]="per"
+  ></mat-progress-bar>
+  <div class="bottom-bar__body">
+    <div class="controls">
+      <button mat-icon-button (click)="toPrev()">
+        <mat-icon class="mat-18" matTooltip="次の質問(←)"
+          >chevron_left</mat-icon
+        >
+      </button>
+      <button
+        mat-icon-button
+        matTooltip="カウントダウン(s)"
+        (click)="start()"
+        *ngIf="!(started$ | async); else stopButton"
+      >
+        <mat-icon class="mat-18">play_arrow</mat-icon>
+      </button>
+      <ng-template #stopButton>
+        <button mat-icon-button matTooltip="一時停止(s)" (click)="stop()">
+          <mat-icon class="mat-18">pause</mat-icon>
+        </button>
+      </ng-template>
+      <button mat-icon-button matTooltip="次の質問(→)" (click)="toNext()">
+        <mat-icon class="mat-18">chevron_right</mat-icon>
+      </button>
+    </div>
+    <p>
+      {{ now.min | number: '2.0' }}:{{ now.sec | number: '2.0' }} /
+      {{ sessionTime / 60 | number: '2.0' }}:{{
+        sessionTime % 60 | number: '2.0'
+      }}
     </p>
-    <div class="timer__value" [style.transform]="'scaleX(' + per + ')'"></div>
   </div>
 </div>

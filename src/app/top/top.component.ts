@@ -79,7 +79,7 @@ export class TopComponent implements OnInit, OnDestroy {
   }
 
   get per(): number {
-    return this.timer / this.sessionTime;
+    return this.timer / this.sessionTime * 100;
   }
 
   private changeQuestion(target: number) {

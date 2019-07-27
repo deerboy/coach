@@ -31,30 +31,6 @@
   }
 }
 
-.wrap {
-  height: 100%;
-  display: flex;
-  flex-flow: column;
-  @include sp {
-    display: block;
-  }
-}
-
-.content {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  position: relative;
-  justify-content: center;
-  overflow: auto;
-  height: 100%;
-  @include sp {
-    display: block;
-    overflow: visible;
-    height: auto;
-  }
-}
-
 .container {
   max-width: 1024px;
   margin: 0 auto;
