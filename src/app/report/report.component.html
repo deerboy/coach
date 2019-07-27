@@ -17,7 +17,7 @@
   </dl>
 
   <ng-container *ngIf="image">
-    <a [href]="image" download="コーチング結果-{{date | date:'yyyy年MM月dd日'}}" mat-raised-button color="primary" [disabled]="!image">
+    <a class="btn" [href]="image" download="コーチング結果-{{date | date:'yyyy年MM月dd日'}}" mat-raised-button color="primary" [disabled]="!image">
       <span>PDFダウンロード</span>
       <mat-icon class="mat-18">picture_as_pdf</mat-icon>
     </a>

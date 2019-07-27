@@ -13,7 +13,8 @@ import {
   MatMenuModule,
   MatBottomSheetModule,
   MatDialogModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -39,7 +40,8 @@ import { AutoFocusDirective } from '../directives/auto-focus.directive';
     ReactiveFormsModule,
     AutoFocusDirective,
     MatDialogModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule
   ]
 })
 export class SharedModule {}

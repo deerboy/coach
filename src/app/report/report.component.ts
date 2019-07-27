@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { ClipboardService } from 'ngx-clipboard';
 import { formatDate } from '@angular/common';
 import { Question } from '../interfaces/question';
-import * as html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-report',
@@ -49,6 +49,8 @@ export class ReportComponent implements OnInit, AfterViewInit {
 
   getImage() {
     const data = document.getElementById('result');
-    html2canvas(data).then(canvas => this.image = canvas.toDataURL());
+    html2canvas(data).then(canvas => {
+      this.image = canvas.toDataURL();
+    });
   }
 }
