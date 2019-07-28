@@ -31,8 +31,8 @@ const DEFAULT_QUESTIONS: Question[] = [
 })
 export class SessionService {
 
-  sessionTime = this.load('sessionTime') || 1800;
-  questions: Question[] = this.load('questions') || DEFAULT_QUESTIONS;
+  sessionTime = 1800;
+  questions: Question[] = DEFAULT_QUESTIONS;
   questionIndex: number;
   sessionSource = new Subject<boolean>();
   session$ = this.sessionSource.asObservable();
